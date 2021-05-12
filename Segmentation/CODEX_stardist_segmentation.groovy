@@ -4,11 +4,11 @@ import qupath.tensorflow.stardist.StarDist2D
     //Brightfield models
     //def pathModel = 'C:/Users/Mark Zaidi/Documents/QuPath/Stardist Trained Models/he_heavy_augment'
     // IF models
-    //def pathModel = 'C:/Users/Mark Zaidi/Documents/QuPath/Stardist Trained Models/dsb2018_paper'
-    def pathModel = 'C:/Users/Mark Zaidi/Documents/QuPath/Stardist Trained Models/dsb2018_heavy_augment'
+    def pathModel = 'C:/Users/Mark Zaidi/Documents/QuPath/Stardist Trained Models/dsb2018_paper'
+    //def pathModel = 'C:/Users/Mark Zaidi/Documents/QuPath/Stardist Trained Models/dsb2018_heavy_augment'
 // Specify whether the above model was trained using a single-channel image (e.g. IF DAPI)
 def model_trained_on_single_channel=1
-def img_res = 0.3775
+def img_res = 1
 print (model_trained_on_single_channel==1)
 // Get current image - assumed to have color deconvolution stains set
 def imageData = getCurrentImageData()

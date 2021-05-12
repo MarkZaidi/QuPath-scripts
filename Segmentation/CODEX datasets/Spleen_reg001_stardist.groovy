@@ -8,20 +8,19 @@
  */
 //Variables to set *************************************************************
 def model_trained_on_single_channel=1 //Set to 1 if the pretrained model you're using was trained on IF sections, set to 0 if trained on brightfield
-param_channel=20 //channel to use for deconvolution. Note, the 1st channel is counted as number 0, and so on
+param_channel=0 //channel to use for deconvolution. Note, the 1st channel is counted as number 0, and so on
 param_median=0 //median filter preprocessing
 param_divide=1 //division preprocessing
 param_add=0 //addition preprocessing
-param_threshold = 0.4//threshold for deteciton
+param_threshold = 0.5//threshold for deteciton
 param_pixelsize=0 //resolution to perform segmentation at. Set to 0 for image resolution
 param_tilesize=1024 //size of tile for processing
-param_expansion=10 //size of cell expansion
-def min_nuc_area=25 //remove any nuclei with an area less than this (in microns)
+param_expansion=5 //size of cell expansion
+def min_nuc_area=10 //remove any nuclei with an area less than this (in microns)
 nuc_area_measurement='Nucleus: Area µm^2'
 def min_nuc_intensity=0 //remove any detections with an intensity below this value
 nuc_intensity_measurement='Ir(193)_193Ir-DNA193: Nucleus: Mean'
 
-param_channel=param_channel-1 // corrects for off-by-one error
 // Specify the model directory (you will need to change this!). Uncomment the model you wish to use
 //Brightfield models
     //def pathModel = 'C:/Users/Mark Zaidi/Documents/QuPath/Stardist Trained Models/he_heavy_augment'
@@ -68,7 +67,6 @@ if (model_trained_on_single_channel!=1 && isBrightfield==false) {
             .cellExpansion(param_expansion) //Cell expansion in microns
             .constrainToParent(false)
 
-
              .build()
 } else {
     //If IF model and IF image (no deconvolution preprocessing). Should also cover brightfield model and brightfield image, however have not tested yet
@@ -101,7 +99,7 @@ if (pathObjects.isEmpty()) {
     Dialogs.showErrorMessage("StarDist", "Please select a parent object!")
     return
 }
-clearDetections()
+//clearDetections()
 stardist.detectObjects(imageData, pathObjects)
 
 
